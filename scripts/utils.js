@@ -3,15 +3,15 @@
  * @param {string} id l'id présent dans le paramètre de l'url
  * @returns {Array} le tableau complet ou filtré si l'id est donné
  */
-export async function getJSONData(id) {
+export const getJSONData = async (id) => {
   let path = document.location.pathname;
   const res = await fetch(
-    path === "/index.html" ? "data.json" : "../data.json"
+    path === "/REST-countries-API/" ? "./data.json" : "../data.json"
   );
   const data = await res.json();
   let dataWithId = data.filter((d) => d.population * data.length == id)[0];
   return id ? dataWithId : data;
-}
+};
 
 /**
  * construit l'id lié à la page de chaque pays
