@@ -4,11 +4,25 @@
  * @returns {Array} le tableau complet ou filtré si l'id est donné
  */
 export async function getJSONData(id) {
-  const res = await fetch("../data.json");
+  let path = document.location.pathname;
+  const res = await fetch(
+    path === "/index.html" ? "data.json" : "../data.json"
+  );
   const data = await res.json();
-  let dataWithId = data.filter((data) => data.population == id)[0];
+  let dataWithId = data.filter((d) => d.population * data.length == id)[0];
   return id ? dataWithId : data;
 }
+
+/**
+ * construit l'id lié à la page de chaque pays
+ * @param {Array} countries
+ * @param {Object} country
+ * @returns {number} l'id du pays
+ */
+export const getCountryPageId = (countries, country) => {
+  let id = country.population * countries.length;
+  return id;
+};
 
 /**
  * bascule le mode du thème et sauvegarde le choix dans la session
