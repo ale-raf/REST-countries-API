@@ -29,10 +29,18 @@ a {
   justify-content: space-between;
   align-items: center;
 }
-.header button {
+.header__dark-mode {
+  display: flex;
+  align-items: center;
   border: 0;
   background-color: transparent;
   color: var(--text-color);
+  font-weight: bold;
+  cursor: pointer;
+}
+.header__dark-mode i {
+  margin-right: 10px;
+  font-size: 1.25rem;
 }
 .navigation {
   max-width: 1200px;
@@ -41,12 +49,15 @@ a {
 }
 .navigation input,
 .navigation select {
-  padding: 15px;
+  padding: 20px;
   background-color: var(--elements-bg);
   border-radius: 5px;
   border: 0;
   box-shadow: var(--elements-shadow);
   color: var(--text-color);
+}
+.navigation input {
+  width: 40%;
 }
 .navigation input:focus {
   outline: none;
@@ -82,12 +93,7 @@ a {
 }
 .country-card h2 {
   margin-bottom: 10px;
-}
-.dark {
-  border: 0;
-  background-color: transparent;
-  font-weight: bold;
-  cursor: pointer;
+  line-height: 1.75rem;
 }
 .dark-mode {
   --body-bg: hsl(207, 26%, 17%);

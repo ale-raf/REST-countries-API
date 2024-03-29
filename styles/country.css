@@ -35,14 +35,20 @@ b {
   box-shadow: var(--elements-shadow);
   padding: 20px 170px;
 }
-.dark {
+.header__dark-mode {
+  display: flex;
+  align-items: center;
   border: 0;
   background-color: inherit;
   color: inherit;
   font-weight: bold;
   cursor: pointer;
 }
-.back {
+.header__dark-mode i {
+  margin-right: 10px;
+  font-size: 1.25rem;
+}
+.back-btn {
   margin-left: 170px;
   margin-top: 50px;
   padding: 10px 30px;
@@ -54,7 +60,7 @@ b {
   text-decoration: none;
   cursor: pointer;
 }
-.back span {
+.back-btn span {
   margin-right: 10px;
   font-weight: bold;
 }
