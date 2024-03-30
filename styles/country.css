@@ -24,8 +24,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
-b {
-  font-weight: bold;
+li {
+  margin-block: 10px;
+  list-style-type: none;
 }
 .header {
   display: flex;
@@ -100,4 +101,28 @@ b {
   box-shadow: var(--elements-shadow);
   color: var(--text-color);
   text-decoration: none;
+}
+.item-0 {
+  grid-area: 1/1/1/1;
+}
+.item-1 {
+  grid-area: 2/1/2/1;
+}
+.item-2 {
+  grid-area: 3/1/3/1;
+}
+.item-3 {
+  grid-area: 4/1/4/1;
+}
+.item-4 {
+  grid-area: 5/1/5/1;
+}
+.item-5 {
+  grid-area: 1/2/1/2;
+}
+.item-6 {
+  grid-area: 2/2/2/2;
+}
+.item-7 {
+  grid-area: 3/2/3/2;
 }
