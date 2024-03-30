@@ -1,9 +1,4 @@
-import {
-  getJSONData,
-  getCountryPageId,
-  toggleThemeMode,
-  retrieveTheme,
-} from "./utils.js";
+import { getJSONData, toggleThemeMode, retrieveTheme } from "./utils.js";
 
 const galleryElt = document.querySelector(".gallery");
 const searchInput = document.querySelector(".navigation input");
@@ -23,7 +18,7 @@ retrieveTheme(darkModeIcon);
  */
 const showCountries = (countries) => {
   for (let country of countries) {
-    let id = getCountryPageId(countries, country);
+    let id = country.numericCode;
     let countryCard = document.createElement("article");
     let countryLink = document.createElement("a");
     let countryFlag = document.createElement("img");
@@ -33,7 +28,7 @@ const showCountries = (countries) => {
     let countryRegion = document.createElement("p");
     let countryCapital = document.createElement("p");
     countryCard.className = "country-card";
-    countryLink.href = `../pages/country.html?id=${id}`;
+    countryLink.href = `./pages/country.html?id=${id}`;
     countryFlag.src = country.flag;
     countryName.textContent = country.name;
     countryPopulation.textContent = `Population: ${country.population.toLocaleString(

@@ -5,23 +5,13 @@
  */
 export const getJSONData = async (id) => {
   let path = document.location.pathname;
+  console.log(path);
   const res = await fetch(
     path === "/REST-countries-API/" ? "./data.json" : "../data.json"
   );
   const data = await res.json();
-  let dataWithId = data.filter((d) => d.population * data.length == id)[0];
+  let dataWithId = data.filter((d) => d.numericCode == id)[0];
   return id ? dataWithId : data;
-};
-
-/**
- * construit l'id lié à la page de chaque pays
- * @param {Array} countries
- * @param {Object} country
- * @returns {number} l'id du pays
- */
-export const getCountryPageId = (countries, country) => {
-  let id = country.population * countries.length;
-  return id;
 };
 
 /**

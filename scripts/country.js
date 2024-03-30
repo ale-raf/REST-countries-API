@@ -23,10 +23,13 @@ const getBorderCountriesInfo = (border) => {
 };
 
 const showBorderCountries = (border) => {
+  let id = getBorderCountriesInfo(border).numericCode;
+  let listElt = document.createElement("li");
   let link = document.createElement("a");
-  link.href = `country.html?id=${getBorderCountriesInfo(border).population}`;
+  link.href = `country.html?id=${id}`;
   link.textContent = getBorderCountriesInfo(border).name;
-  bordersElt.append(link);
+  listElt.append(link);
+  bordersElt.append(listElt);
 };
 
 const getCountryInfo = (country) => {
@@ -46,6 +49,7 @@ const getCountryInfo = (country) => {
     let text = keys[i][1];
     if (country[key]) {
       p.textContent = text + country[key]?.toLocaleString("en-US");
+      p.className = `item-${i}`;
       if (Array.isArray(country[key])) {
         p.textContent =
           text + country[key].map((prop) => prop.name ?? prop).join(", ");
