@@ -1,4 +1,9 @@
-import { getJSONData, toggleThemeMode, retrieveTheme } from "./utils.js";
+import {
+  getJSONData,
+  elementFromHtml,
+  toggleThemeMode,
+  retrieveTheme,
+} from "./utils.js";
 
 const galleryElt = document.querySelector(".gallery");
 const searchInput = document.querySelector(".navigation input");
@@ -19,34 +24,21 @@ retrieveTheme(darkModeIcon);
 const showCountries = (countries) => {
   for (let country of countries) {
     let id = country.numericCode;
-    let countryCard = document.createElement("article");
-    let countryLink = document.createElement("a");
-    let countryFlag = document.createElement("img");
-    let countryContent = document.createElement("div");
-    let countryName = document.createElement("h2");
-    let countryPopulation = document.createElement("p");
-    let countryRegion = document.createElement("p");
-    let countryCapital = document.createElement("p");
-    countryCard.className = "country-card";
-    countryLink.href = `./pages/country.html?id=${id}`;
-    countryFlag.src = country.flag;
-    countryName.textContent = country.name;
-    countryPopulation.textContent = `Population: ${country.population.toLocaleString(
-      "en-US"
-    )}`;
-    countryRegion.textContent = `Region: ${country.region}`;
-    countryCapital.textContent = country.capital
-      ? `Capital: ${country.capital}`
-      : "";
-    countryContent.append(
-      countryName,
-      countryPopulation,
-      countryRegion,
-      countryCapital
-    );
-    countryLink.append(countryFlag, countryContent);
-    countryCard.appendChild(countryLink);
-    galleryElt.appendChild(countryCard);
+    let capital = country.capital ? "Capital: " + country.capital : "";
+    let countryElt = elementFromHtml(`
+      <article class="country-card">
+        <a href="./pages/country.html?id=${id}">
+          <img src=${country.flag} alt=${country.name}>
+          <div>
+            <h2>${country.name}</h2>
+            <p>Population: ${country.population.toLocaleString("en-US")}</p>
+            <p>Region: ${country.region}</p>
+            <p>${capital}</p>
+          </div>
+        </a>
+      </article>
+    `);
+    galleryElt.appendChild(countryElt);
   }
 };
 showCountries(countries);
