@@ -5,13 +5,23 @@
  */
 export const getJSONData = async (id) => {
   let path = document.location.pathname;
-  console.log(path);
   const res = await fetch(
     path === "/REST-countries-API/" ? "./data.json" : "../data.json"
   );
   const data = await res.json();
   let dataWithId = data.filter((d) => d.numericCode == id)[0];
   return id ? dataWithId : data;
+};
+
+/**
+ * crée et retourne un template dont le contenu est passé en paramètre
+ * @param {string} html le contenu html du template créé
+ * @returns {Element} le premier élément issu du template
+ */
+export const elementFromHtml = (html) => {
+  const template = document.createElement("template");
+  template.innerHTML = html.trim();
+  return template.content.firstElementChild;
 };
 
 /**
