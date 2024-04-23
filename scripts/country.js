@@ -1,4 +1,9 @@
-import { getJSONData, toggleThemeMode, retrieveTheme } from "./utils.js";
+import {
+  getJSONData,
+  elementFromHtml,
+  toggleThemeMode,
+  retrieveTheme,
+} from "./utils.js";
 
 const content = document.querySelector(".country__content");
 const flagElt = document.querySelector(".container img");
@@ -24,12 +29,12 @@ const getBorderCountriesInfo = (border) => {
 
 const showBorderCountries = (border) => {
   let id = getBorderCountriesInfo(border).numericCode;
-  let listElt = document.createElement("li");
-  let link = document.createElement("a");
-  link.href = `country.html?id=${id}`;
-  link.textContent = getBorderCountriesInfo(border).name;
-  listElt.append(link);
-  bordersElt.append(listElt);
+  let borderCountriesElt = elementFromHtml(`
+    <li>
+      <a href="country.html?id=${id}">${getBorderCountriesInfo(border).name}</a>
+    </li>
+  `);
+  bordersElt.append(borderCountriesElt);
 };
 
 const getCountryInfo = (country) => {
@@ -49,7 +54,7 @@ const getCountryInfo = (country) => {
     let text = keys[i][1];
     if (country[key]) {
       p.textContent = text + country[key]?.toLocaleString("en-US");
-      p.className = `item-${i}`;
+      p.className = `country__content__items item-${i}`;
       if (Array.isArray(country[key])) {
         p.textContent =
           text + country[key].map((prop) => prop.name ?? prop).join(", ");
@@ -60,13 +65,16 @@ const getCountryInfo = (country) => {
 };
 
 const showCountry = (country) => {
+  getCountryInfo(country);
   document.title = "Countries - " + country.name;
   flagElt.src = country.flag;
   nameElt.textContent = country.name;
-  getCountryInfo(country);
-  country.borders
-    ? country.borders.map(showBorderCountries)
-    : (bordersElt.innerHTML = "");
+  if (country.borders) {
+    country.borders.map(showBorderCountries);
+    bordersElt.firstElementChild.textContent = "Border Countries :";
+  } else {
+    bordersElt.innerHTML = "";
+  }
 };
 
 showCountry(country);
